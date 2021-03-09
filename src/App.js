@@ -6,6 +6,7 @@ import result from "./result.json";
 //import Charts from "./components/Charts";
 function App() {
   const [load, setLoad] = useState(0);
+  const [menu, setMenu] = useState(true);
   const months = [
     "January",
     "February",
@@ -20,6 +21,11 @@ function App() {
     "November",
     "December",
   ];
+
+  const OnMenu = () => {
+    setMenu((menu) => !menu);
+  };
+
   const prev = () => {
     setLoad(load - 1);
   };
@@ -28,7 +34,21 @@ function App() {
   };
   return (
     <div className="grid items-stretch overflow-hidden">
-      <div className="col-start-1 row-start-1 relative z-20 self-start uppercase font-bold tracking-widest flex items-center space-x-2 p-4">
+      <div className="absolute z-10 m-4">
+        <button
+          className=" uppercase tracking-widest text-xs p-4 bg-gray-200 outline-none focus:outline-none rounded font-bold"
+          onClick={OnMenu}
+        >
+          Menu
+        </button>
+      </div>
+      <div
+        className={
+          menu
+            ? "col-start-1 row-start-1 relative z-20 self-start uppercase font-bold tracking-widest flex items-center space-x-2 p-4 invisible"
+            : "visible col-start-1 row-start-1 relative z-20 self-start uppercase font-bold tracking-widest flex items-center space-x-2 p-4"
+        }
+      >
         <div className="bg-gray-300  px-6 py-4 rounded shadow-xl grid">
           <span className="text-mobile">Name</span>
           {result[0].name}
